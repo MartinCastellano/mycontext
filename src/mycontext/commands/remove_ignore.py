@@ -1,4 +1,4 @@
-##### ./src/mycontext/commands/remove_ignore.py #####
+##### ./src/mycontext/commands/remove-ignore.py #####
 from ..core import remove_from_custom_ignore
 
 def execute(args):
@@ -6,7 +6,7 @@ def execute(args):
 
 def register_subparser(subparsers):
     parser_rem = subparsers.add_parser(
-        "remove_ignore",
+        "remove-ignore",
         help="Removes an existing rule from the custom ignore file."
     )
     parser_rem.add_argument(

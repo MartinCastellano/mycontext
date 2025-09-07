@@ -41,6 +41,7 @@ def _get_module_config_dir():
 MODULE_CONFIG_DIR = _get_module_config_dir()
 CUSTOM_IGNORE_FILE = os.path.join(MODULE_CONFIG_DIR, "custom_ignore.json")
 RULES_FILE = os.path.join(MODULE_CONFIG_DIR, "context_rules.md")
+LOCAL_IGNORE_FILE = ".mycontext-ignore" 
 
 def _get_config_location_info():
     """Returns information about where the configuration files are being saved."""
@@ -62,11 +63,28 @@ def _load_default_ignore_config():
         return {"names": [], "patterns": [], "extensions": []}
 
 
-def _load_ignore_config():
+def _load_ignore_config():    
     """
-    Loads the ignore configuration. Prioritizes 'custom_ignore.json'
-    if it exists, otherwise uses 'default_ignore.json'.
+    Loads the ignore configuration based on priority:
+    1. .mycontext-ignore in the current directory.
+    2. custom_ignore.json in the user's config directory.
+    3. default_ignore.json packaged with the module.
     """
+
+    local_ignore_path = os.path.join(os.getcwd(), LOCAL_IGNORE_FILE)
+
+    if os.path.exists(local_ignore_path):
+        try:
+            with open(local_ignore_path, 'r') as f:
+                config_data = json.load(f)
+                return (
+                    config_data.get("names", []),
+                    config_data.get("patterns", []),
+                    config_data.get("extensions", [])
+                )
+        except (FileNotFoundError, json.JSONDecodeError):
+             print(f"Warning: Could not read or parse local ignore file '{local_ignore_path}'. Falling back to global/default config.", file=sys.stderr)
+    
     config_data = _load_default_ignore_config()
     if os.path.exists(CUSTOM_IGNORE_FILE):
         try:
@@ -84,6 +102,11 @@ def _load_ignore_config():
 
 def add_to_custom_ignore(kind, value):
     """Adds a new rule to the custom_ignore.json file."""
+    local_ignore_path = os.path.join(os.getcwd(), LOCAL_IGNORE_FILE)
+    if os.path.exists(local_ignore_path):
+        print(f"Warning: A local '{LOCAL_IGNORE_FILE}' file exists which overrides global rules in this directory.")
+        print("The 'add-ignore' command only modifies the global file. Your changes may not take effect here.")
+
     config_data = _load_default_ignore_config()
     if os.path.exists(CUSTOM_IGNORE_FILE):
         try:
@@ -109,6 +132,11 @@ def add_to_custom_ignore(kind, value):
 
 def remove_from_custom_ignore(kind, value):
     """Removes an existing rule from the custom_ignore.json file."""
+    local_ignore_path = os.path.join(os.getcwd(), LOCAL_IGNORE_FILE)
+    if os.path.exists(local_ignore_path):
+        print(f"Warning: A local '{LOCAL_IGNORE_FILE}' file exists which overrides global rules in this directory.")
+        print("The 'remove-ignore' command only modifies the global file. Your changes may not take effect here.")
+
     config_data = {}
     if not os.path.exists(CUSTOM_IGNORE_FILE):
         print(f"The file '{CUSTOM_IGNORE_FILE}' does not exist. It will be created from the default.")
@@ -143,7 +171,18 @@ def list_current_ignores():
     """Displays the current ignore rules, prioritizing the custom file."""
     source_file = ""
     config_data = {}
-    if os.path.exists(CUSTOM_IGNORE_FILE):
+    local_ignore_path = os.path.join(os.getcwd(), LOCAL_IGNORE_FILE)
+
+    if os.path.exists(local_ignore_path):
+        source_file = f"{local_ignore_path} (local project-specific)"
+        try:
+            with open(local_ignore_path, 'r') as f:
+                config_data = json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError):
+            print(f"Error: The local file '{local_ignore_path}' is corrupt. Cannot display rules.", file=sys.stderr)
+            return
+        
+    elif os.path.exists(CUSTOM_IGNORE_FILE):
         source_file = CUSTOM_IGNORE_FILE
         try:
             with open(CUSTOM_IGNORE_FILE, 'r') as f:

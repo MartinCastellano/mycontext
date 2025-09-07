@@ -38,6 +38,13 @@ Copying and pasting code into LLMs is a slow and error-prone process:
 
 ## 📦 Installation
 
+### Prerequisites (for Linux users)
+
+On Debian-based systems (like Ubuntu), you may need to install the `python3-venv` package, which is required to create virtual environments:
+```bash
+sudo apt update && sudo apt install python3-venv
+```
+
 You can install `mycontext` using `pip` (for Python environments) or `npm` (for Node.js environments).
 
 ### With pip
@@ -72,6 +79,32 @@ mycontext ./src --rules security_audit.md -c
 ```
 
 ### Command Reference
+
+### Project-Specific Ignores with `.mycontext-ignore`
+
+For more granular control, you can define ignore rules on a per-project basis by creating a **`.mycontext-ignore`** file in the root directory of your project.
+
+If this file is present, it will take **highest priority**, overriding any global or default settings. The `add-ignore` and `remove-ignore` commands will not affect this file; it must be managed manually.
+
+The `.mycontext-ignore` file must be a JSON file with the same structure as the default ignore configuration.
+
+**Example `.mycontext-ignore`:**
+```json
+{
+  "names": [
+    "dist",
+    "build",
+    "docs"
+  ],
+  "patterns": [
+    "*.test.js",
+    "temp_*"
+  ],
+  "extensions": [
+    ".env"
+  ]
+}
+```
 
 #### **Generate Context**
 The default command. Runs if no other is specified.
