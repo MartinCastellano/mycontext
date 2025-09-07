@@ -38,12 +38,17 @@ Copying and pasting code into LLMs is a slow and error-prone process:
 
 ## 📦 Installation
 
-To install `mycontext`, you only need `pip`.
+You can install `mycontext` using `pip` (for Python environments) or `npm` (for Node.js environments).
 
+### With pip
 ```bash
 pip install mycontext
 ```
-*(Note: Make sure the package name matches the one you chose in `setup.cfg`.)*
+
+### With npm
+```bash
+npm install -g mycontext-node
+```
 
 ## ⌨️ Usage and Commands
 
@@ -59,7 +64,10 @@ mycontext . -c
 # 3. Use a specific rule profile for generation
 mycontext ./src --rules ./docs/refactoring_rules.md
 
-# 4. Combine everything: generate from 'src' with a profile and copy to clipboard
+# 4. Generate context without applying any rules
+mycontext . --no-rules
+
+# 5. Combine everything: generate from 'src' with a profile and copy to clipboard
 mycontext ./src --rules security_audit.md -c
 ```
 
@@ -71,6 +79,7 @@ The default command. Runs if no other is specified.
 - `-o, --output [FILENAME]`: Saves the output to a specific file.
 - `-r, --rules [RULES_FILE.md]`: Uses a custom rule profile for this run.
 - `-c, --to-clipboard`: Copies the output to the clipboard instead of a file.
+- `--no-rules`: Generates the context without including any rules file.
 
 #### **Manage Exclusion Rules (Ignores)**
 - `mycontext list-ignore`: Displays the current exclusion rules.
