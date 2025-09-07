@@ -1,0 +1,9 @@
+const { spawn } = require("child_process");
+const args = process.argv.slice(2);
+
+const bin = process.platform === "win32" 
+  ? ".npm-venv\\Scripts\\mycontext.exe" 
+  : ".npm-venv/bin/mycontext";
+
+const child = spawn(bin, args, { stdio: "inherit" });
+child.on("exit", code => process.exit(code));

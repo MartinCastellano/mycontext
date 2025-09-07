@@ -1,0 +1,19 @@
+{
+    "name": "mycontext-cli-node",
+    "version": "0.1.0",
+    "description": "Node wrapper for the Python mycontext-cli tool",
+    "bin": {
+        "mycontext": "bin/mycontext"
+    },
+    "scripts": {
+        "install": "python3 -m pip install . --break-system-packages"
+    },
+    "keywords": [
+        "llm",
+        "cli",
+        "devtool",
+        "context"
+    ],
+    "author": "Martin Castellano",
+    "license": "GPL-3.0-or-later"
+}
