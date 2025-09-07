@@ -5,8 +5,11 @@
     "bin": {
         "mycontext": "bin/mycontext"
     },
+    "files": [
+        "bin"
+    ],
     "scripts": {
-        "install": "python3 -m venv .npm-venv && ./.npm-venv/bin/pip install mycontext==0.1.8 --break-system-packages"
+        "install": "python3 -m venv .npm-venv && ./.npm-venv/bin/pip install mycontext==0.1.10 --break-system-packages"
     },
     "keywords": [
         "llm",
@@ -15,5 +18,9 @@
         "context"
     ],
     "author": "Martin Castellano",
-    "license": "GPL-3.0-or-later"
+    "license": "GPL-3.0-or-later",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/MartinCastellano/mycontext.git"
+    }
 }
