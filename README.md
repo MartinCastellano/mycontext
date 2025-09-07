@@ -1,7 +1,7 @@
 # 🚀 mycontext-cli
 
 [![PyPI Version](https://img.shields.io/pypi/v/mycontext-cli.svg)](https://pypi.org/project/mycontext-cli/)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/[YOUR_GITHUB_USERNAME]/[YOUR_REPO_NAME]/python-package.yml?branch=main)](https://github.com/[YOUR_GITHUB_USERNAME]/[YOUR_REPO_NAME]/actions)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/MartinCastellano/mycontext/python-package.yml?branch=main)](https://github.com/MartinCastellano/mycontext/actions)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Python Versions](https://img.shields.io/pypi/pyversions/mycontext-cli.svg)](https://pypi.org/project/mycontext-cli/)
 
