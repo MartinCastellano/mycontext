@@ -2,3 +2,5 @@
 **/context_window_*.txt
 dist
 mycontext.egg-info
+**/.venv/
+**/.npm-venv/

@@ -1,12 +1,12 @@
 {
     "name": "mycontext-node",
-    "version": "0.1.9",
+    "version": "0.1.10",
     "description": "Node wrapper for the Python mycontext tool",
     "bin": {
         "mycontext": "bin/mycontext"
     },
     "scripts": {
-        "install": "python3 -m pip install mycontext==0.1.9 --break-system-packages"
+        "install": "python3 -m venv .npm-venv && ./.npm-venv/bin/pip install mycontext==0.1.8 --break-system-packages"
     },
     "keywords": [
         "llm",
