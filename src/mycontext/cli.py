@@ -3,7 +3,7 @@ import sys
 import argparse
 from . import commands  
 
-VERSION = "0.1.7"
+VERSION = "0.1.9"
 
 def main():
     parser = argparse.ArgumentParser(
