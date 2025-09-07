@@ -1,4 +1,4 @@
-# 🚀 mycontext-cli
+# 🚀 mycontext
 
 [![PyPI Version](https://img.shields.io/pypi/v/mycontext.svg)](https://pypi.org/project/mycontext/)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/MartinCastellano/mycontext/python-package.yml?branch=main)](https://github.com/MartinCastellano/mycontext/actions)
@@ -41,7 +41,7 @@ Copying and pasting code into LLMs is a slow and error-prone process:
 To install `mycontext`, you only need `pip`.
 
 ```bash
-pip install mycontext-cli
+pip install mycontext
 ```
 *(Note: Make sure the package name matches the one you chose in `setup.cfg`.)*
 

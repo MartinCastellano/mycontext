@@ -1,7 +1,7 @@
 {
-    "name": "mycontext-cli-node",
-    "version": "0.1.4",
-    "description": "Node wrapper for the Python mycontext-cli tool",
+    "name": "mycontext-node",
+    "version": "0.1.7",
+    "description": "Node wrapper for the Python mycontext tool",
     "bin": {
         "mycontext": "bin/mycontext"
     },

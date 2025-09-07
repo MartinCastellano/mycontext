@@ -1,9 +1,26 @@
+#!/usr/bin/env node
 const { spawn } = require("child_process");
+const path = require("path");
+
+// Argumentos pasados al CLI (ej: ., -c, list-rules)
 const args = process.argv.slice(2);
 
-const bin = process.platform === "win32" 
-  ? ".npm-venv\\Scripts\\mycontext.exe" 
-  : ".npm-venv/bin/mycontext";
+// 1. Construir la ruta al ejecutable de Python de forma fiable.
+const binPath = process.platform === "win32"
+  ? path.join(__dirname, "..", ".npm-venv", "Scripts", "mycontext.exe")
+  : path.join(__dirname, "..", ".npm-venv", "bin", "mycontext");
 
-const child = spawn(bin, args, { stdio: "inherit" });
+// 2. Ejecutar el comando con la ruta correcta.
+const child = spawn(binPath, args, { stdio: "inherit" });
+
+// 3. (IMPORTANTE) Añadir manejo de errores por si el ejecutable no se encuentra.
+child.on("error", (err) => {
+    console.error(`\nError: No se pudo ejecutar el script de Python.`);
+    console.error(`Ruta intentada: ${binPath}`);
+    console.error(`Asegúrate de que la instalación con 'npm install' se completó correctamente.`);
+    console.error(`Detalles del error:`, err);
+    process.exit(1);
+});
+
+// 4. Salir con el mismo código que el proceso hijo.
 child.on("exit", code => process.exit(code));
